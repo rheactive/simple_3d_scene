@@ -2,6 +2,8 @@
 
 I really just wanted to see if I can do it without looking up any code.
 
+![Projection scheme](./images/Screenshot_1.png)
+
 Below is somewhat lengthy derivation. I'll make it more clear later. 
 
 And of course, there are still some issues with the program (the rotation doesn't work as intended, and I haven't figured out how to zoom yet).
