@@ -1,6 +1,8 @@
 # Simple 3D scene from scratch
 
-Update: Remade with triangles and some (almost) good lighting.
+## Update 2022-12-21
+
+Remade with triangles and some (almost) good lighting.
 
 ![Projection scheme](./images/screenshot7.png)
 
