@@ -46,33 +46,19 @@ $$ v = r \theta = r \left( \frac{\pi}{2} + \theta_0 - \text{acos} \frac{z}{\sqrt
 
 There also should be clear order of rendering, because otherwise we'll see far-away objects through the ones that are closer to us.
 
-The size of any object should be scaled according to the same formulas. Then, if a point is made to look like a ball of size $d$, its visible size on screen $d_u$ is going to depend on the distance.
-
-$$ d = 2 \sqrt{x^2 + y^2} \sin \frac{\Delta \phi}{2} $$
-
-$$\Delta \phi = 2~ \text{asin} \frac{d}{2 \sqrt{x^2 + y^2}} $$
-
-$$ d_u = 2 r ~ \text{asin} \frac{d}{2 \sqrt{x^2 + y^2}} $$
-
-The points (or balls) are easy to organize according to their distance from us, so we'll know in which order to render them.
+Since this version of the program works with triangles, we are going to order them according to the distance between midpoint and the camera.
 
 ## Summary for fixed camera
 
-So for this case, if we want to render some balls, all we need to do is to start from their data:
+So for this case, if we want to render a points, all we need to do is to start its data:
 
-$$ x_n, y_n, z_n, d_n $$
+$$ x, y, z$$
 
-And then calculate their on-screen coordinates and sizes according to:
+And then calculate its on-screen coordinates according to:
 
-$$ u_n = r \left(\frac{\pi}{2} + \phi_0 - \text{acos} \frac{x_n}{\sqrt{x_n^2 + y_n^2}} \right) $$
+$$ u = r \left(\frac{\pi}{2} + \phi_0 - \text{acos} \frac{x}{\sqrt{x^2 + y^2}} \right) $$
 
-$$ v_n = r \left( \frac{\pi}{2} + \theta_0 - \text{acos} \frac{z_n}{\sqrt{y_n^2 + z_n^2}} \right) $$
-
-$$ d_{un} = 2 r ~ \text{asin} \frac{d_n}{2 \sqrt{x_n^2 + y_n^2}} $$
-
-$$ d_{vn} = 2 r ~ \text{asin} \frac{d_n}{2 \sqrt{y_n^2 + z_n^2}} $$
-
-And yeah, there's something wrong with the sizes: shouldn't they be the same? I guess, we'll figure it out as we go.
+$$ v = r \left( \frac{\pi}{2} + \theta_0 - \text{acos} \frac{z}{\sqrt{y^2 + z^2}} \right) $$
 
 ## Rotating camera
 
@@ -102,25 +88,21 @@ Now we have to replace all the y coordinates in the previous formulas by:
 
 Start with:
 
-$$ x_n, y_n, z_n, d_n $$
+$$ x, y, z$$
 
-And then calculate the on-screen coordinates and sizes according to:
+And then calculate the on-screen coordinates according to:
 
  $$x^\prime =  x \cos \delta + y \sin \delta $$
 
  $$y^\prime =  r -x \sin \delta + y \cos \delta $$
 
- $$ \phi = \frac{\pi}{2} + \phi_0 - \text{acos} \frac{x^\prime_n}{\sqrt{x_n^{\prime 2} + y_n^{\prime 2}}} $$
+ $$ \phi = \frac{\pi}{2} + \phi_0 - \text{acos} \frac{x^\prime}{\sqrt{x^{\prime 2} + y^{\prime 2}}} $$
 
-$$ \theta = \frac{\pi}{2} + \theta_0 - \text{acos} \frac{z_n}{\sqrt{y_n^{\prime 2} + z_n^2}} $$
+$$ \theta = \frac{\pi}{2} + \theta_0 - \text{acos} \frac{z}{\sqrt{y^{\prime 2} + z^2}} $$
 
-$$ u_n = r \phi $$
+$$ u = r \phi $$
 
-$$ v_n = r \theta $$
-
-For the distance, it makes more sense to change it according to:
-
-$$ d_{n}^\prime = 2 r ~ \text{asin} \frac{d_n}{2 \sqrt{x_n^{\prime 2} + y_n^{\prime 2} + z_n^2}} $$
+$$ v = r \theta $$
 
 We'll also need to define according to screen size:
 
