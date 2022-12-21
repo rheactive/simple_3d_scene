@@ -2,7 +2,7 @@
 
 I really just wanted to see if I can do it without looking up any code.
 
-![Projection scheme](./images/Screenshot_1.png)
+![Projection scheme](./images/Screenshot_5.png)
 
 Below is somewhat lengthy derivation. I'll make it more clear later. 
 
