@@ -142,4 +142,8 @@ $$x^\prime =  x \cos \delta + y \sin \delta $$
 
  $$z^{\prime \prime} = x^\prime \cos \gamma + y^\prime \sin \gamma $$
 
+## Lighting
 
+For the lighting, we create a point source, and then derive the intensity from scalar product of two vectors: the path between light source and the midpoint of a triangle, and the normal vector of the triangle.
+
+Still need to figure out how to account for the shade.
