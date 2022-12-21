@@ -5,6 +5,7 @@ use std::vec::Vec;
 const PI: f32 = 3.1415926536;
 const SQRT2: f32 = 1.4142135623731;
 const SPEED: f32 = 1.0;
+const SPEEDX: f32 = 500.0;
 const PHI0: f32 = 0.25 * PI;
 const NV: usize = 9;
 
@@ -118,12 +119,17 @@ async fn main() {
 
     let mut delta = 0.0f32;
     let mut gamma = 0.0f32;
+    let mut x0 = 0.0f32;
+    let mut y0 = 0.0f32;
+    let mut z0 = 0.0f32;
     let mut ft: f32;
     let mut par: [f32; 5];
     let mut d: f32;
     let mut tetrahedron: Vec<(f32, f32, f32)>;
 
+    //while !is_key_down(KeyCode::Space) {
     loop {
+
         clear_background(WHITE);
 
         
@@ -133,6 +139,8 @@ async fn main() {
         d = par[0];
 
         draw_text(format!("Use arrow keys to rotate the camera").as_str(), 5.0 * d, 3.0 * d, 2.5 * d, BLACK);
+        draw_text(format!("Use [Q][W][E][A][S][D] keys to move the object").as_str(), 5.0 * d, 6.0 * d, 2.5 * d, BLACK);
+        //draw_text(format!("Press [SPACE] to reset the position").as_str(), 5.0 * d, 9.0 * d, 2.5 * d, BLACK);
 
         if is_key_down(KeyCode::Left) {
             delta = delta - SPEED * ft;
@@ -150,13 +158,38 @@ async fn main() {
             gamma = gamma - SPEED * ft;
         }
 
-        tetrahedron = create_tetrahedron(0.0, 0.0, 0.0, 30.0 * d);
+        if is_key_down(KeyCode::Q) {
+            y0 = y0 + SPEEDX * ft;
+        }
+
+        if is_key_down(KeyCode::E) {
+            y0 = y0 - SPEEDX * ft;
+        }
+
+        if is_key_down(KeyCode::W) {
+            z0 = z0 + SPEEDX * ft;
+        }
+
+        if is_key_down(KeyCode::S) {
+            z0 = z0 - SPEEDX * ft;
+        }
+
+        if is_key_down(KeyCode::A) {
+            x0 = x0 - SPEEDX * ft;
+        }
+
+        if is_key_down(KeyCode::D) {
+            x0 = x0 + SPEEDX * ft;
+        }
+
+        tetrahedron = create_tetrahedron(x0, y0, z0, 30.0 * d);
         
         draw_points(par, delta, gamma, tetrahedron);
 
         
 
         next_frame().await;
-    }
+    //}
+    }  
     
 }
