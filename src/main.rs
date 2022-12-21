@@ -1,6 +1,5 @@
 use macroquad::prelude::*;
 use std::vec::Vec;
-//use std::slice;
 
 const PI: f32 = 3.1415926536;
 const SQRT2: f32 = 1.4142135623731;
@@ -127,7 +126,6 @@ async fn main() {
     let mut d: f32;
     let mut tetrahedron: Vec<(f32, f32, f32)>;
 
-    //while !is_key_down(KeyCode::Space) {
     loop {
 
         clear_background(WHITE);
@@ -140,7 +138,6 @@ async fn main() {
 
         draw_text(format!("Use arrow keys to rotate the camera").as_str(), 5.0 * d, 3.0 * d, 2.5 * d, BLACK);
         draw_text(format!("Use [Q][W][E][A][S][D] keys to move the object").as_str(), 5.0 * d, 6.0 * d, 2.5 * d, BLACK);
-        //draw_text(format!("Press [SPACE] to reset the position").as_str(), 5.0 * d, 9.0 * d, 2.5 * d, BLACK);
 
         if is_key_down(KeyCode::Left) {
             delta = delta - SPEED * ft;
@@ -189,7 +186,6 @@ async fn main() {
         
 
         next_frame().await;
-    //}
     }  
     
 }
