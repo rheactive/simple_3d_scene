@@ -116,8 +116,6 @@ fn draw_points (par: [f32; 5], delta: f32, gamma: f32, pn: Vec<(f32, f32, f32)>)
 #[macroquad::main("Simple 3D scene")]
 async fn main() {
 
-    clear_background(LIGHTGRAY);
-
     let mut delta = 0.0f32;
     let mut gamma = 0.0f32;
     let mut ft: f32;
@@ -126,7 +124,7 @@ async fn main() {
     let mut tetrahedron: Vec<(f32, f32, f32)>;
 
     loop {
-        clear_background(LIGHTGRAY);
+        clear_background(WHITE);
 
         
         ft = get_frame_time() as f32;
