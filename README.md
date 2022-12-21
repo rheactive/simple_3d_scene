@@ -42,7 +42,7 @@ $$ v = r \theta = r \left( \frac{\pi}{2} + \theta_0 - \text{acos} \frac{z}{\sqrt
 
 There also should be clear order of rendering, because otherwise we'll see far-away objects through the ones that are closer to us.
 
-The size of any object should be scaled according to the same formulas. Then, if a point is made to look like a ball of size $ d $, its visible size on screen $d_u $ is going to depend on the distance.
+The size of any object should be scaled according to the same formulas. Then, if a point is made to look like a ball of size $d$, its visible size on screen $d_u$ is going to depend on the distance.
 
 $$ d = 2 \sqrt{x^2 + y^2} \sin \frac{\Delta \phi}{2} $$
 
@@ -122,13 +122,13 @@ We'll also need to define according to screen size:
 
 $$r, \phi_0, \theta_0 $$
 
-We should put $\phi_0 $ to something like 45 degrees, and then $r, \theta_0 $ are defined as:
+We should put $\phi_0$ to something like 45 degrees, and then $r, \theta_0$ are defined as:
 
 $$r = \frac{W}{2 \phi_0} = \frac{2}{\pi} W $$
 
 $$\theta_0 = \phi_0 \frac{H}{W} = \frac{\pi}{4} \frac{H}{W} $$
 
-where \$W, H $ are the screen width and height.
+where $W, H$ are the screen width and height.
 
 We also need to ensure that:
 
