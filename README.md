@@ -2,7 +2,7 @@
 
 Update: Remade with triangles and some (almost) good lighting.
 
-![Projection scheme](./images/screenshot6.png)
+![Projection scheme](./images/screenshot7.png)
 
 Below is somewhat lengthy derivation. I'll make it more clear later. 
 
