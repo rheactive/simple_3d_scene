@@ -1,12 +1,13 @@
 use macroquad::prelude::*;
 use std::vec::Vec;
 
-const PI: f32 = 3.1415926536;
-const SQRT2: f32 = 1.4142135623731;
+const PI: f32 = std::f32::consts::PI;
+const SQRT2: f32 = std::f32::consts::SQRT_2;
 const SPEED: f32 = 1.0;
 const SPEEDX: f32 = 500.0;
 const PHI0: f32 = 0.25 * PI;
 const NV: usize = 9;
+const TOL: f32 = 1e-12;
 
 // get parameters related to window size
 fn get_window_par (height: f32, width: f32) -> [f32; 5] {
@@ -79,10 +80,17 @@ fn project_coord (par: [f32; 5], delta: f32, gamma: f32, x: f32, y: f32, z: f32)
     let xp = xpp;
     let yp = r + zpp * gamma.sin() + ypp * gamma.cos();
     let zp = zpp * gamma.cos() - ypp * gamma.sin();
+    let rpx = xp * xp + yp * yp;
+    let rpz = zp * zp + yp * yp;
     let rp = xp * xp + yp * yp + zp * zp;
-    let u = r * (0.5 * PI + PHI0 - (xp / (xp * xp + yp * yp).sqrt()).acos());
-    let v = height - r * (0.5 * PI + theta0 - (zp / (zp * zp + yp * yp).sqrt()).acos());
-    let dp = 2.0 * r * (0.5 * d / rp.sqrt()).asin();
+    let mut u = -r;
+    let mut v = -r;
+    let mut dp = d;
+    if rpx > TOL || rpz > TOL || rp > TOL {
+        u = r * (0.5 * PI + PHI0 - (xp / rpx.sqrt()).acos());
+        v = height - r * (0.5 * PI + theta0 - (zp / rpz.sqrt()).acos());
+        dp = 2.0 * r * (0.5 * d / rp.sqrt()).asin();
+    }
     (rp as usize, u, v, dp)
 }
 
@@ -102,7 +110,7 @@ fn draw_points (par: [f32; 5], delta: f32, gamma: f32, pn: Vec<(f32, f32, f32)>)
     let rmax = points_data[0].0;
     // drawing
     for p in points_data {
-        let rp = 255 - ((p.0 as f32) / (rmax as f32) * 200 as f32) as u8;
+        let rp = 255 - (p.0 * 200 / rmax) as u8;
         let u = p.1;
         let v = p.2;
         let d = p.3;
@@ -138,6 +146,7 @@ async fn main() {
 
         draw_text(format!("Use arrow keys to rotate the camera").as_str(), 5.0 * d, 3.0 * d, 2.5 * d, BLACK);
         draw_text(format!("Use [Q][W][E][A][S][D] keys to move the object").as_str(), 5.0 * d, 6.0 * d, 2.5 * d, BLACK);
+        draw_text(format!("FPS is {}", get_fps()).as_str(), 5.0 * d, 9.0 * d, 2.5 * d, BLACK);
 
         if is_key_down(KeyCode::Left) {
             delta = delta - SPEED * ft;
