@@ -1,8 +1,8 @@
 # Simple 3D scene from scratch
 
-I really just wanted to see if I can do it without looking up any code.
+Update: Remade with triangles and some (almost) good lighting.
 
-![Projection scheme](./images/Screenshot_5.png)
+![Projection scheme](./images/screenshot6.png)
 
 Below is somewhat lengthy derivation. I'll make it more clear later. 
 
